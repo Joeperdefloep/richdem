@@ -2,6 +2,7 @@
 #include <richdem/depressions/depressions.hpp>
 #include <richdem/methods/terrain_attributes.hpp>
 #include <richdem/methods/flow_accumulation.hpp>
+#include <richdem/methods/catchment_delineation.hpp>
 #include <richdem/flats/flats.hpp>
 #include <pybind11/numpy.h>
 #include <pybind11/stl_bind.h>
@@ -80,6 +81,21 @@ void TemplatedWrapper(py::module &m, std::string tname){
   m.def("FM_OCallaghanD4",        &FM_OCallaghan        <Topology::D4,T>, "TODO");
   m.def("FM_D8",                  &FM_D8                <T>,              "TODO");
   m.def("FM_D4",                  &FM_D4                <T>,              "TODO");
+
+  m.def("DC_mask_props",          &DC_mask_props        <T,uint8_t>,         "TODO");
+  // TODO: make this work for different datatypes. Do we just make a big list?
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <float   ,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <double  ,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <int8_t  ,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <int16_t ,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <int32_t ,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <int64_t ,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <uint8_t ,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <uint16_t,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <uint32_t,T,uint8_t>, "TODO");
+  m.def("DC_mask_mflow",          &DC_mask_mflow        <uint64_t,T,uint8_t>, "TODO");
+  m.def("DC_line_props",          &DC_line_props        <uint8_t>,         "TODO");
+  m.def("DC_line_mflow",          &DC_line_mflow        <T,uint8_t>,         "TODO");
 
   py::class_<Array2D<T>>(m, ("Array2D_" + tname).c_str(), py::buffer_protocol(), py::dynamic_attr())
       .def(py::init<>())

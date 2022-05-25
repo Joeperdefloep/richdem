@@ -5,6 +5,7 @@
 #include <richdem/common/loaders.hpp>
 #include <richdem/misc/misc_methods.hpp>
 #include <richdem/richdem.hpp>
+#include <richdem/methods/catchment_delineation_generic.hpp>
 
 #include <filesystem>
 #include <queue>
@@ -424,5 +425,173 @@ TEST_CASE("BucketFill"){
     };
 
     CHECK(set_raster==good_raster);
+  }
+}
+
+// // remove this when no longer necessary!
+// //function to print the queue
+// void printQueue(std::queue<GridCell> q)
+// {
+//   //printing content of queue 
+//   while (!q.empty()){
+//     std::cout<<" ("<<q.front().x<<", "<<q.front().y<<")";
+//     q.pop();
+//   }
+//   std::cout<<std::endl;
+// }
+
+TEST_CASE("Checking Catchment Delineation Generic"){
+  SUBCASE("mask"){
+    SUBCASE("single"){
+    Array2D<uint8_t> mask = {
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 1, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+    };
+    mask.setNoData(0);
+    Array2D<uint8_t> upslope(mask,0);
+
+    std::queue<GridCell> q_expected;
+    q_expected.emplace(2,2);
+    const Array2D<uint8_t> upslope_e = {
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 2, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+    };
+
+    std::queue<GridCell> q = queue_from_mask(mask, upslope);
+    std::cout<< mask.noData() << std::endl;
+    CHECK(q.front().x == q_expected.front().x);
+    CHECK(q.front().y == q_expected.front().y);
+    CHECK(q.size() == 1);
+    CHECK(upslope(2,2) == 2);
+    }
+    SUBCASE("multi"){
+    Array2D<uint8_t> mask = {
+      {0, 0, 0, 0, 0, 0},
+      {0, 1, 0, 0, 0, 0},
+      {0, 0, 1, 0, 0, 0},
+      {0, 1, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+    };
+    mask.setNoData(0);
+    Array2D<uint8_t> upslope(mask,0);
+
+    std::queue<GridCell> q_expected;
+    q_expected.emplace(1,1);
+    q_expected.emplace(1,3);
+    q_expected.emplace(2,2);
+
+    const Array2D<uint8_t> upslope_e = {
+      {0, 0, 0, 0, 0, 0},
+      {0, 2, 0, 0, 0, 0},
+      {0, 0, 2, 0, 0, 0},
+      {0, 2, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+    };
+
+    std::queue q = queue_from_mask(mask, upslope);
+    CHECK(q.size() == 3);
+    CHECK(q == q_expected);
+    CHECK(upslope == upslope_e);
+    }
+    // TODO: make more tests?
+  }
+
+  SUBCASE("line"){
+    int x0=0;
+    int y0=0;
+    int x1=2;
+    int y1=4;
+
+    std::queue<GridCell> q_expected;
+    q_expected.emplace(0,0);
+    q_expected.emplace(0,1);
+    q_expected.emplace(0,2);
+    q_expected.emplace(0,3);
+    q_expected.emplace(0,4);
+
+    const Array2D<uint8_t> upslope_e = {
+      {2, 0, 0, 0, 0, 0},
+      {2, 0, 0, 0, 0, 0},
+      {2, 0, 0, 0, 0, 0},
+      {2, 0, 0, 0, 0, 0},
+      {2, 0, 0, 0, 0, 0},
+    };
+    Array2D<uint8_t> upslope(upslope_e,0);
+
+    // upslope_e.printAll();
+    std::queue<GridCell> q = queue_from_linepoints(x0,y0,x1,y1,upslope);
+    for (int y = 0; y< upslope.width(); y++){
+      for (int x = 0; x<upslope.height(); x++){
+        std::cout << unsigned(upslope(x,y)) << " ";
+      }
+      std::cout << std::endl;
+    }
+    // REQUIRE_EQ(q, q_expected);
+    CHECK(upslope == upslope_e);
+  }
+
+  Array2D<int> dem = {
+    {1,2,3,4,5},
+    {1,2,3,4,5},
+    {1,2,3,4,5},
+    {1,2,3,4,5},
+    {1,2,3,4,5},
+  };
+  dem.setNoData(0);
+
+  SUBCASE("mflow"){
+    
+    Array2D<uint8_t> result(dem,0);
+    std::queue<GridCell> expansion;
+    expansion.emplace(0,2);
+
+    Array2D<uint8_t> expected = {
+      {0, 0, 1, 1, 1},
+      {0, 1, 1, 1, 1},
+      {0, 1, 1, 1, 1},
+      {0, 1, 1, 1, 1},
+      {0, 0, 1, 1, 1}
+    };
+    result.setNoData(0);
+    expected.setNoData(0); //the function sets nodata to 0
+
+    for (int y = 0; y< result.width(); y++){
+      for (int x = 0; x<result.height(); x++){
+        std::cout << unsigned(result(x,y)) << " ";
+      }
+      std::cout << std::endl;
+    }
+    upslope_cells_mflow(expansion, dem, result);
+    CHECK(result == expected);
+  }
+
+  SUBCASE("props (take quinn)"){
+    //more methods is not necessary
+    Array2D<uint8_t> result(dem,0);
+    result.setNoData(0);
+    std::queue<GridCell> expansion;
+    expansion.emplace(0,2);
+
+    //construct the proportions array
+    Array3D<float> props(dem);
+    FM_Quinn(dem,props);
+
+    Array2D<uint8_t> expected = {
+      {0, 0, 0, 0, 0},
+      {0, 1, 1, 1, 0},
+      {0, 1, 1, 1, 0},
+      {0, 1, 1, 1, 0},
+      {0, 0, 0, 0, 0}      // TODO: maybe add edge cells if they are higher? is slightly complex though, cuz Array3D does not support that...
+    };                     // so flow always goes off the edge of the grid, hence the 0s.
+    expected.setNoData(0); //the function sets nodata to 0
+
+    upslope_cells_props(expansion, props, result);
+    CHECK(result == expected);
   }
 }

@@ -2,6 +2,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<float>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<float>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<float> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<float>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<float, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<float, float, double>,        "TODO");         
@@ -22,6 +25,12 @@
   m.def("FA_Rho8",               &FA_Rho8<float,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<float,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<float,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<float>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<float>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<float,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<float,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -128,6 +137,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<double>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<double>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<double> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<double>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<double, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<double, float, double>,        "TODO");         
@@ -148,6 +160,12 @@
   m.def("FA_Rho8",               &FA_Rho8<double,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<double,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<double,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<double>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<double>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<double,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<double,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -254,6 +272,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<int8_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<int8_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<int8_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<int8_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<int8_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<int8_t, float, double>,        "TODO");         
@@ -274,6 +295,12 @@
   m.def("FA_Rho8",               &FA_Rho8<int8_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<int8_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<int8_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<int8_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<int8_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<int8_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<int8_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -380,6 +407,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<int16_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<int16_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<int16_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<int16_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<int16_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<int16_t, float, double>,        "TODO");         
@@ -400,6 +430,12 @@
   m.def("FA_Rho8",               &FA_Rho8<int16_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<int16_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<int16_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<int16_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<int16_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<int16_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<int16_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -506,6 +542,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<int32_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<int32_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<int32_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<int32_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<int32_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<int32_t, float, double>,        "TODO");         
@@ -526,6 +565,12 @@
   m.def("FA_Rho8",               &FA_Rho8<int32_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<int32_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<int32_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<int32_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<int32_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<int32_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<int32_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -632,6 +677,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<int64_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<int64_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<int64_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<int64_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<int64_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<int64_t, float, double>,        "TODO");         
@@ -652,6 +700,12 @@
   m.def("FA_Rho8",               &FA_Rho8<int64_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<int64_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<int64_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<int64_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<int64_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<int64_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<int64_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -758,6 +812,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<uint8_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<uint8_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<uint8_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<uint8_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<uint8_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<uint8_t, float, double>,        "TODO");         
@@ -778,6 +835,12 @@
   m.def("FA_Rho8",               &FA_Rho8<uint8_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<uint8_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<uint8_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<uint8_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<uint8_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<uint8_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<uint8_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -884,6 +947,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<uint16_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<uint16_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<uint16_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<uint16_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<uint16_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<uint16_t, float, double>,        "TODO");         
@@ -904,6 +970,12 @@
   m.def("FA_Rho8",               &FA_Rho8<uint16_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<uint16_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<uint16_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<uint16_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<uint16_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<uint16_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<uint16_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -1010,6 +1082,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<uint32_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<uint32_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<uint32_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<uint32_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<uint32_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<uint32_t, float, double>,        "TODO");         
@@ -1030,6 +1105,12 @@
   m.def("FA_Rho8",               &FA_Rho8<uint32_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<uint32_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<uint32_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<uint32_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<uint32_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<uint32_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<uint32_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(
@@ -1136,6 +1217,9 @@
   m.def("rdPFepsilon",           &PriorityFloodEpsilon_Barnes2014<uint64_t>,       "Fill all depressions with epsilon."); //TODO
 
   m.def("rdBreach",              &Lindsay2016<uint64_t>,                  "TODO");
+  m.def("rdBreach",              [](Array2D<uint64_t> &dem, const int mode, bool fill_depressions, 
+
+    &Lindsay2016<uint64_t>,                  "TODO");
 
   m.def("TA_SPI",                &TA_SPI<uint64_t, float, double>,        "TODO");         
   m.def("TA_CTI",                &TA_CTI<uint64_t, float, double>,        "TODO");         
@@ -1156,6 +1240,12 @@
   m.def("FA_Rho8",               &FA_Rho8<uint64_t,double>,              "TODO");
   m.def("FA_D8",                 &FA_D8<uint64_t,double>,                "TODO");
   m.def("FA_OCallaghan",         &FA_OCallaghan<uint64_t,double>,        "TODO");
+
+  m.def("InitFromMask",          &InitFromMask<uint64_t>,                "TODO");
+  m.def("InitFromLinePoints",    &InitFromLinePoints<uint64_t>,          "TODO");
+  m.def("UpslopeCellsFromProps", &generic_upslope_cells<uint64_t,uint8_t>,"TODO");
+  //m.def("UpslopeCellsMF",        &upslope_cells_mf<uint64_t,uint8_t>,    "TODO");
+
 
   //TODO
   // m.def(

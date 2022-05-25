@@ -23,6 +23,7 @@ class GridCell {
   GridCell(){}
   /// Initiate the grid cell to the coordinates (x0,y0)
   GridCell(int x, int y):x(x),y(y){}
+  bool operator == (const GridCell &a) const {return x == a.x && y == a.y;}
 };
 
 
